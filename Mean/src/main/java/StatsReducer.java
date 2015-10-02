@@ -24,6 +24,7 @@ public class StatsReducer extends
 
         Collections.sort(numList);
 
+
         HashMap hm = new HashMap();
         for(int i=0;i<numList.size();i++)
         {
@@ -59,8 +60,23 @@ public class StatsReducer extends
         String key3Value="Mode";
         Text val3 = new Text();
         val3.set(Integer.toString(largestCount));
-
         context.write(new Text(key3Value),val3);
+        String key4Value="Minimum";
+        Text val4 = new Text();
+        val4.set(Integer.toString(numList.get(0)));
+        context.write(new Text(key4Value), val4);
+        String key5Value="Maximum";
+        Text val5 = new Text();
+        val5.set(Integer.toString(numList.get(numList.size()-1)));
+        context.write(new Text(key5Value),val5);
+
+        String key6Value="Range";
+        Text val6 = new Text();
+        val6.set(Integer.toString(numList.get(numList.size()-1)-numList.get(0)));
+        context.write(new Text(key6Value),val6);
+
+
+
         int size  = numList.size();
         mean=mean/size;
         if(size%2 == 0){
